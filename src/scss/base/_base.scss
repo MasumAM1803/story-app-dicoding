@@ -49,3 +49,18 @@ a {
 .card__body-date {
     @include width-fit;
 }
+
+.profile__card {
+    @include width-fit;
+
+    img {
+        width: 240px;
+    }
+
+    p {
+        margin: 16px 0px;
+        font-weight: 700;
+        font-size: 24px;
+        text-align: center;
+    }
+}
