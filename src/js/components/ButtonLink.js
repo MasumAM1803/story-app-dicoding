@@ -28,7 +28,7 @@ class ButtonLink extends LitWithoutShadowDom {
 
   render() {
     return html`
-      <a class="btn ${this.classes}" href=${this.to}>
+      <a class="btn ${this.classes} btn-primary" href=${this.to}>
         ${this._templateIcon()}${this.content}
       </a>
     `;
@@ -36,7 +36,7 @@ class ButtonLink extends LitWithoutShadowDom {
 
   _templateIcon() {
     if (this.icon) {
-      return html`<i class="bi ${this.icon} me-1"></i>`;
+      return html`<i class="bi ${this.icon}"></i>`;
     }
 
     return html``;
