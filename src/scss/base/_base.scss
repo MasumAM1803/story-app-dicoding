@@ -1,0 +1,51 @@
+$primary-card-text: #0F1035;
+$secondary-card-text: #365486;
+$third-card-text: #11235A;
+
+@mixin width-fit {
+    width: fit-content;
+}
+
+main {
+    padding-top: 55px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.bg-primary{ background-color: #0F1035 !important;}
+
+.card {
+    min-height: 100%;
+}
+
+.card__header {
+    @include width-fit;
+
+    a {
+        &:hover {
+            opacity: 80%;
+        }
+    }
+}
+
+.card__header-title {
+    @include width-fit;
+    color: $primary-card-text;
+}
+
+.card__body-description {
+    @include width-fit;
+    color: $secondary-card-text;
+}
+
+.card__body-date {
+    @include width-fit;
+    color: $third-card-text;
+}
+
+.card__body-date {
+    @include width-fit;
+}
