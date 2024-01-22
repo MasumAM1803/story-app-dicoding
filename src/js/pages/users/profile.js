@@ -1,5 +1,9 @@
+import CheckUserAuth from "../../utils/check-user-auth";
+
 const Profile = {
   async init() {
+    CheckUserAuth.checkLoginState();
+    
     await this._initialData();
   },
 

@@ -1,7 +1,10 @@
 import formatDate from '../formattedDate.js'
+import CheckUserAuth from '../utils/check-user-auth.js';
 
 const Dashboard = {
   async init() {
+    CheckUserAuth.checkLoginState();
+
     await this._initialData();
     this._initialListener();
   },
