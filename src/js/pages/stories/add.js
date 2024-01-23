@@ -1,3 +1,4 @@
+import Story from "../../network/story";
 import CheckUserAuth from "../../utils/check-user-auth";
 
 const Add = {
@@ -22,14 +23,21 @@ const Add = {
     );
   },
 
-  _sendPost() {
+  async _sendPost() {
     const formData = this._getFormData();
 
     if (this._validateFormData({ ...formData })) {
       console.log('formData');
       console.log(formData);
 
-      // this._goToDashboardPage();
+      try {
+        const response = await Story.store(formData);
+        window.alert('New story added successfully');
+
+      this._goToDashboardPage();
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
 
@@ -38,7 +46,7 @@ const Add = {
     const descriptionInput = document.querySelector('#validationCustomDescription');
 
     return {
-      photos: photosInput.files[0],
+      photo: photosInput.files[0],
       description: descriptionInput.value,
     };
   },
