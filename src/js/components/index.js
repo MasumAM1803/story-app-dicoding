@@ -1,6 +1,7 @@
 import './CardDashboard';
 import './ButtonLink';
 import './ModalDetail';
+import './LoadingSpinner';
 
 import './navbar/NavApp';
 import './navbar/NavLinks';

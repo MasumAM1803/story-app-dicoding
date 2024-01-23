@@ -12,7 +12,9 @@ const Dashboard = {
   },
 
   async _initialData() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
     try {
+      loadingSpinner.style.display = "flex";
       const response = await Story.getAll();
       const responseRecords = response.data;
 
@@ -27,6 +29,8 @@ const Dashboard = {
       } else {
         Alert("alert-danger", error.message);
       }
+    } finally {
+      loadingSpinner.style.display = "none";
     }
   },
 

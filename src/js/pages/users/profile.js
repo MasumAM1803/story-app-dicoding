@@ -11,6 +11,7 @@ const Profile = {
 
   async _initialData() {
     const userId = this._getUserId();
+    const loadingSpinner = document.getElementById('loadingSpinner');
 
     if (!userId) {
       alert('Data dengan name yang dicari tidak ditemukan');
@@ -18,6 +19,7 @@ const Profile = {
     }
 
     try {
+      loadingSpinner.style.display = "flex";
       const response = await User.getById(userId);
       const responseRecords = response.data;
 
@@ -32,6 +34,8 @@ const Profile = {
       } else {
         Alert("alert-danger", error.message);
       }
+    } finally {
+      loadingSpinner.style.display = "none";
     }
   },
 

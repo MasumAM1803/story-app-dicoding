@@ -26,15 +26,20 @@ const Add = {
 
   async _sendPost() {
     const formData = this._getFormData();
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const bgBlur = document.getElementById('bgBlur');
 
     if (this._validateFormData({ ...formData })) {
       console.log('formData');
       console.log(formData);
 
       try {
+        bgBlur.style.display = "flex";
+        loadingSpinner.style.display = "flex";
+
         const response = await Story.store(formData);
         Alert("alert-success", 'New story added successfully');
-        setInterval(() => this._goToDashboardPage(), 2000);
+        setInterval(() => this._goToDashboardPage(), 1000);
       } catch (error) {
         if (error.response) {
           Alert("alert-danger", error.response.data.message);
@@ -43,6 +48,9 @@ const Add = {
         } else {
           Alert("alert-danger", error.message);
         }
+      } finally {
+        bgBlur.style.display = "none";
+        loadingSpinner.style.display = "none";
       }
     }
   },
