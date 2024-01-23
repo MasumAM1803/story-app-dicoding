@@ -1,6 +1,7 @@
 import formatDate from '../formattedDate.js'
 import CheckUserAuth from '../utils/check-user-auth.js';
 import Story from '../network/story.js'
+import Alert from '../components/Alert.js';
 
 const Dashboard = {
   async init() {
@@ -11,7 +12,6 @@ const Dashboard = {
   },
 
   async _initialData() {
-
     try {
       const response = await Story.getAll();
       const responseRecords = response.data;
@@ -19,8 +19,14 @@ const Dashboard = {
       this._userListStory = responseRecords.listStory;
       this._populateStoriesDataToCard(this._userListStory);
 
-  } catch (error) {
-      console.log(error)
+    } catch (error) {
+      if (error.response) {
+        Alert("alert-danger", error.response.data.message);
+      } else if (error.request) {
+        Alert("alert-danger", error.request.statusText);
+      } else {
+        Alert("alert-danger", error.message);
+      }
     }
   },
 

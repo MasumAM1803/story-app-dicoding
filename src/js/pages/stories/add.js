@@ -1,3 +1,4 @@
+import Alert from "../../components/Alert";
 import Story from "../../network/story";
 import CheckUserAuth from "../../utils/check-user-auth";
 
@@ -32,11 +33,16 @@ const Add = {
 
       try {
         const response = await Story.store(formData);
-        window.alert('New story added successfully');
-
-      this._goToDashboardPage();
+        Alert("alert-success", 'New story added successfully');
+        setInterval(() => this._goToDashboardPage(), 2000);
       } catch (error) {
-        console.log(error);
+        if (error.response) {
+          Alert("alert-danger", error.response.data.message);
+        } else if (error.request) {
+          Alert("alert-danger", error.request.statusText);
+        } else {
+          Alert("alert-danger", error.message);
+        }
       }
     }
   },

@@ -1,3 +1,4 @@
+import Alert from "../../components/Alert";
 import Config from "../../config/config";
 import Auth from "../../network/auth";
 import CheckUserAuth from "../../utils/check-user-auth";
@@ -37,10 +38,16 @@ const Login = {
               password: formData.password,
             });
             Utils.setUserToken(Config.USER_TOKEN_KEY, response.data.loginResult.token);
-            window.alert('Signed user in detected');
-            this._goToDashboardPage();
+            Alert("alert-success", 'Signed in successfully');
+            setInterval(() => this._goToDashboardPage(), 2000);
           } catch (error) {
-            console.error(error);
+            if (error.response) {
+              Alert("alert-danger", error.response.data.message);
+            } else if (error.request) {
+              Alert("alert-danger", error.request.statusText);
+            } else {
+              Alert("alert-danger", error.message);
+            }
           }
       }
     },

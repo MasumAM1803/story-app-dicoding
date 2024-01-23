@@ -1,3 +1,4 @@
+import Alert from "../../components/Alert";
 import Auth from "../../network/auth";
 import CheckUserAuth from "../../utils/check-user-auth";
 
@@ -36,10 +37,17 @@ const Register = {
               email: formData.email,
               password: formData.password,
             });
-            window.alert('Registered a new user');
-            this._goToLoginPage();
+            console.log(response)
+            Alert("alert-success", 'Registered a new user');
+            setInterval(() => this._goToLoginPage(), 2000);
           } catch (error) {
-            console.error(error);
+            if (error.response) {
+              Alert("alert-danger", error.response.data.message);
+            } else if (error.request) {
+              Alert("alert-danger", error.request.statusText);
+            } else {
+              Alert("alert-danger", error.message);
+            }
           }
       }
     },

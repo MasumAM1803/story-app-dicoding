@@ -1,3 +1,4 @@
+import Alert from "../../components/Alert";
 import User from "../../network/user";
 import CheckUserAuth from "../../utils/check-user-auth";
 
@@ -24,7 +25,13 @@ const Profile = {
       this._populateStoriesData(userProfile);
 
     } catch (error) {
-      console.log(error)
+      if (error.response) {
+        Alert("alert-danger", error.response.data.message);
+      } else if (error.request) {
+        Alert("alert-danger", error.request.statusText);
+      } else {
+        Alert("alert-danger", error.message);
+      }
     }
   },
 
