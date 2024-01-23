@@ -94,7 +94,7 @@ const Dashboard = {
       <div class="col-12 col-md-6 mt-3">
         <div class="card">
           <div class="card__header m-2">
-            <a class="" href="/users/profile.html?name=${storyRecord.name.replace(/\s/g, '')}">
+            <a class="" href="/users/profile.html?id=${storyRecord.id}">
               <h1 class="card__header-title">${storyRecord.name}</h4>
             </a>
           </div>

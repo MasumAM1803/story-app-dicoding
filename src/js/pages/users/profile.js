@@ -1,3 +1,4 @@
+import User from "../../network/user";
 import CheckUserAuth from "../../utils/check-user-auth";
 
 const Profile = {
@@ -15,18 +16,21 @@ const Profile = {
       return;
     }
 
-    const fetchRecords = await fetch('/data/DATA.json');
-    const responseRecords = await fetchRecords.json();
-    const userProfile = responseRecords.listStory;
+    try {
+      const response = await User.getById(userId);
+      const responseRecords = response.data;
 
-    const dataRecord = userProfile.find((item) => item.name.replace(/\s/g, '') === userId);
+      const userProfile = responseRecords.story;
+      this._populateStoriesData(userProfile);
 
-    this._populateStoriesData(dataRecord);
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   _getUserId() {
     const searchParamDetail = new URLSearchParams(window.location.search);
-    return searchParamDetail.has('name') ? searchParamDetail.get('name') : null;
+    return searchParamDetail.has('id') ? searchParamDetail.get('id') : null;
   },
 
   _populateStoriesData(userProfile = null) {
