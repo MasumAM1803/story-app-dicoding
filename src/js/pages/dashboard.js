@@ -1,5 +1,6 @@
 import formatDate from '../formattedDate.js'
 import CheckUserAuth from '../utils/check-user-auth.js';
+import Story from '../network/story.js'
 
 const Dashboard = {
   async init() {
@@ -10,10 +11,17 @@ const Dashboard = {
   },
 
   async _initialData() {
-    const fetchRecords = await fetch('/data/DATA.json');
-    const responseRecords = await fetchRecords.json();
-    this._userListStory = responseRecords.listStory;
-    this._populateStoriesDataToCard(this._userListStory);
+
+    try {
+      const response = await Story.getAll();
+      const responseRecords = response.data;
+
+      this._userListStory = responseRecords.listStory;
+      this._populateStoriesDataToCard(this._userListStory);
+
+  } catch (error) {
+      console.log(error)
+    }
   },
 
   _initialListener() {
