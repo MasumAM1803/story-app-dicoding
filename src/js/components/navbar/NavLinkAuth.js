@@ -31,8 +31,8 @@ class NavLinkAuth extends LitWithoutShadowDom {
           </div>
           <span id="nameUserLogged"></span>
         </a>
-        <ul class="dropdown-menu">
-          <a class="dropdown-item" id="userLogOut" @click=${this._userLogOut}>
+        <ul class="dropdown-menu btn-logout">
+          <a class="dropdown-item nav-link" id="userLogOut" @click=${this._userLogOut}>
             ${msg(`Keluar`)}
           </a>
         </ul>

@@ -7,3 +7,15 @@
 .nav-dark {
     color: #DCF2F1 !important;
 }
+
+.btn-logout {
+    background-color: transparent;
+    cursor: pointer;
+
+    a {
+        &:hover {
+            background-color: transparent;
+            // color: #DCF2F1;
+        }
+    }
+}
